@@ -16,9 +16,14 @@ func main() {
 	jobs <- Job{VM: "cow-3", CPUs: 4}
 	close(jobs)
 
-	// Worker: reads a fixed five times (bad idea, on purpose).
-	for i := 1; i <= 5; i++ {
-		j, ok := <-jobs
-		fmt.Printf("read %d: vm=%q cpus=%d ok=%v\n", i, j.VM, j.CPUs, ok)
+	i := 1
+	for j := range jobs {
+		fmt.Printf("read %d: vm=%q cpus=%d ok=%v\n", i, j.VM, j.CPUs, true)
+		i++
 	}
+	// Worker: reads a fixed five times (bad idea, on purpose).
+	// for i := 1; i <= 5; i++ {
+	// 	j, ok := <-jobs
+	// 	fmt.Printf("read %d: vm=%q cpus=%d ok=%v\n", i, j.VM, j.CPUs, ok)
+	// }
 }
