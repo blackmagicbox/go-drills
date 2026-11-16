@@ -17,7 +17,7 @@ func TestReturnsProbeError(t *testing.T) {
 	err := CheckHealth(ctx, func() error { return errNodeDown })
 	if !errors.Is(err, errNodeDown) {
 		t.Fatalf("got %v, want errNodeDown", err)
-	}
+	} // Pass
 }
 
 func TestTimesOut(t *testing.T) {
@@ -30,7 +30,7 @@ func TestTimesOut(t *testing.T) {
 	})
 	if !errors.Is(err, context.DeadlineExceeded) {
 		t.Fatalf("got %v, want context.DeadlineExceeded", err)
-	}
+	} // Pass
 }
 
 func TestNoGoroutineLeak(t *testing.T) {
@@ -51,5 +51,5 @@ func TestNoGoroutineLeak(t *testing.T) {
 	after := runtime.NumGoroutine()
 	if leaked := after - before; leaked > 0 {
 		t.Fatalf("%d goroutines leaked after 10 timed-out checks", leaked)
-	}
+	} // Fail
 }

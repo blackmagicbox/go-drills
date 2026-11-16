@@ -2,8 +2,11 @@
 
 ## Prediction (before running)
 - Which test fails:
+The leak test
 - Leak count I expect:
+10
 - Why:
+Because the timeout is 5ms and the Probe takes 50
 
 ## Exact failure message
 
